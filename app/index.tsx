@@ -18,6 +18,12 @@ export default function Index() {
           <ButtonPrimary type="border">
             Belum ada akun ?, Daftar dulu
           </ButtonPrimary>
+          <Text style={{
+            fontSize: 14,
+          }}>
+            Dengan masuk atau mendaftar, kamu menyetujui
+            Ketentuan layanan dan Kebijakan privasi.
+          </Text>
         </View>
       </View>
     </WrapperScreen>
