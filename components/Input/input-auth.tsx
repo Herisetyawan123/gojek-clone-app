@@ -1,8 +1,20 @@
 import Colors from "@/constants/Colors";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRef, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 const InputAuth = () => {
+  const inputNumberRef = useRef<TextInput>(null);
+  const [showReset, setShowReset] = useState<boolean>(false);
+
+  const onFocusInput = () => {
+    setShowReset(!showReset)
+  }
+
+  const unFocusInput = () => {
+    setShowReset(!showReset)
+    inputNumberRef.current?.blur();
+  }
 
   return (
     <View style={styles.container}>
@@ -14,11 +26,25 @@ const InputAuth = () => {
           <MaterialIcons name="flag" size={28} />
           <MaterialIcons name="arrow-drop-down" size={28} />
         </Pressable>
-        <TextInput placeholder="83xxxxx" style={{
-          borderColor: Colors.green.dark,
-          borderBottomWidth: 1,
-          flex: 1
-        }} keyboardType="phone-pad" />
+        <View style={styles.inputNumber}>
+          <TextInput
+            placeholder="83xxxxx"
+            style={{
+              flex: 1
+            }}
+            onFocus={onFocusInput}
+            keyboardType="phone-pad"
+            ref={inputNumberRef}
+          />
+
+          {
+            showReset ? (
+              <Pressable onPress={unFocusInput} style={styles.resetInput}>
+                <MaterialIcons name="close" color={Colors.grey.light} size={18} />
+              </Pressable>
+            ) : null
+          }
+        </View>
       </View>
     </View>
   )
@@ -43,6 +69,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     color: Colors.grey.dark
   },
+  inputNumber: {
+    flexDirection: "row",
+    width: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: Colors.green.dark,
+    borderBottomWidth: 1,
+
+  },
+  resetInput: {
+    backgroundColor: Colors.grey.dark,
+    borderRadius: 100,
+    padding: 5,
+  }
 })
 
 export default InputAuth;
