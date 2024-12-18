@@ -16,12 +16,7 @@ const SignIn = () => {
       </View>
       {/* Label Input Phone Number */}
       <InputAuth />
-      <ButtonPrimary styles={{
-        position: "absolute",
-        bottom: 20,
-        left: 20,
-        right: 20,
-      }}>
+      <ButtonPrimary styles={styles.customButton}>
         Continue
       </ButtonPrimary>
     </WrapperScreen>
@@ -41,5 +36,11 @@ const styles = StyleSheet.create({
   textInformation: {
     marginTop: 14,
     color: Colors.grey.darkGrey,
+  },
+  customButton: {
+    position: "absolute",
+    bottom: 20,
+    left: 20,
+    right: 20,
   }
 })

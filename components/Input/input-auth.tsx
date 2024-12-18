@@ -1,11 +1,16 @@
 import Colors from "@/constants/Colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import WrapperModal from "../Modal/WrapperModal";
+import TileCountry from "../tile-country";
+import { countryCodes, TileCountryType } from "@/data/code-country";
 
 const InputAuth = () => {
+  const [selectedCountry, setSelectedCountry] = useState<TileCountryType>(countryCodes[0]);
   const inputNumberRef = useRef<TextInput>(null);
   const [showReset, setShowReset] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const onFocusInput = () => {
     setShowReset(!showReset)
@@ -16,15 +21,22 @@ const InputAuth = () => {
     inputNumberRef.current?.blur();
   }
 
+  const onSelect = (country: TileCountryType) => {
+    setModalVisible(false);
+    setSelectedCountry(country)
+  }
+
   return (
     <View style={styles.container}>
 
       {/* label */}
       <Text style={styles.label}>Phone number</Text>
       <View style={styles.inputPhone}>
-        <Pressable style={styles.buttonCountry}>
-          <MaterialIcons name="flag" size={28} />
-          <MaterialIcons name="arrow-drop-down" size={28} />
+        <Pressable style={styles.buttonCountry} onPress={() => setModalVisible(true)}>
+          <Image source={selectedCountry.image} />
+          <Text style={styles.codeCountry}>
+            {selectedCountry.code}
+          </Text>
         </Pressable>
         <View style={styles.inputNumber}>
           <TextInput
@@ -46,6 +58,30 @@ const InputAuth = () => {
           }
         </View>
       </View>
+      <WrapperModal show={modalVisible} toggle={() => setModalVisible(!modalVisible)}>
+        <Text style={styles.titleModal}>Cari kode negara</Text>
+        <View style={styles.searchContainer}>
+          <MaterialIcons style={styles.iconSearch} name="search" size={28} />
+          <TextInput style={styles.searchCountry} placeholder="ketik nama atau kode negara" />
+        </View>
+        <ScrollView style={{
+          height: 500,
+        }}>
+          <Text style={styles.titlePopuler}>Negara populer</Text>
+          {
+            countryCodes.slice(0, 3).map((value, index) => (
+              <TileCountry key={index} country={value} onSelect={onSelect} />
+            ))
+          }
+          <Text style={styles.titlePopuler}>Semua Negara</Text>
+
+          {
+            countryCodes.slice(3, countryCodes.length).map((value, index) => (
+              <TileCountry key={index} country={value} onSelect={onSelect} />
+            ))
+          }
+        </ScrollView>
+      </WrapperModal>
     </View>
   )
 }
@@ -67,7 +103,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    gap: 10,
     color: Colors.grey.dark
+  },
+  codeCountry: {
+    color: Colors.grey.darkGrey,
+    fontWeight: "700",
   },
   inputNumber: {
     flexDirection: "row",
@@ -82,6 +123,35 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.grey.dark,
     borderRadius: 100,
     padding: 5,
+  },
+  titleModal: {
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  searchContainer: {
+    marginTop: 20,
+    width: "100%",
+    paddingHorizontal: 30,
+    paddingVertical: 5,
+    borderRadius: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+    backgroundColor: Colors.grey.light,
+  },
+  searchCountry: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: Colors.grey.dark,
+  },
+  iconSearch: {
+    color: Colors.grey.dark,
+  },
+  titlePopuler: {
+    marginVertical: 20,
+    fontSize: 20,
+    fontWeight: "bold",
   }
 })
 
