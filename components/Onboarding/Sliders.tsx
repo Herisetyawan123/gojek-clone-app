@@ -28,7 +28,7 @@ const Sliders = () => {
       <View style={styles.indicatorBall}>
         {
           pager.pages.map((_, index) => (
-            <Pressable style={position == index ? styles.ballActive : styles.ballInActive} onPress={() => goToPage(index)}></Pressable>
+            <Pressable key={index} style={position == index ? styles.ballActive : styles.ballInActive} onPress={() => goToPage(index)}></Pressable>
           ))
         }
       </View>
