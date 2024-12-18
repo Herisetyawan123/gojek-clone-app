@@ -1,11 +1,11 @@
-import { Pressable, PressableProps, StyleProp, StyleSheet, Text, View } from 'react-native'
+import { Pressable, PressableProps, StyleProp, StyleSheet, Text, View, ViewProps } from 'react-native'
 import React from 'react'
 import Colors from '@/constants/Colors'
 
 type ButtonType = {
   children: string,
   onPress?: () => void,
-  styles?: StyleProp<PressableProps>,
+  styles?: StyleProp<ViewProps>,
   type?: string,
 }
 

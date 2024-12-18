@@ -3,6 +3,8 @@ import React from 'react'
 import AppBar from '@/components/Onboarding/AppBar'
 import WrapperScreen from '@/components/WrapperScreen'
 import Colors from '@/constants/Colors'
+import InputAuth from '@/components/Input/input-auth'
+import ButtonPrimary from '@/components/Btn/ButtonPrimary'
 
 const SignIn = () => {
   return (
@@ -13,6 +15,15 @@ const SignIn = () => {
         <Text style={styles.textInformation}>Enter your registered phone number to log in</Text>
       </View>
       {/* Label Input Phone Number */}
+      <InputAuth />
+      <ButtonPrimary styles={{
+        position: "absolute",
+        bottom: 20,
+        left: 20,
+        right: 20,
+      }}>
+        Continue
+      </ButtonPrimary>
     </WrapperScreen>
   )
 }
