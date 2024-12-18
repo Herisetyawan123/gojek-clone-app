@@ -1,15 +1,15 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View, ViewProps } from 'react-native'
 import React from 'react'
 import { router, useNavigation } from 'expo-router'
 import { MaterialIcons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 
-const AppBar = () => {
+const AppBar = ({ style, withLogo = true }: { style?: any, withLogo: boolean }) => {
   const navigation = useNavigation();
   const canGoBack = navigation.canGoBack()
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.logoBar}>
         {
           canGoBack ? (
@@ -17,7 +17,11 @@ const AppBar = () => {
               <MaterialIcons name='arrow-back' size={28} />
             </Pressable>
           ) : null}
-        <Image source={require('@/assets/logo/gojek-text.png')} />
+        {
+          withLogo ? (
+            <Image source={require('@/assets/logo/gojek-text.png')} />
+          ) : null
+        }
       </View>
       {
 
