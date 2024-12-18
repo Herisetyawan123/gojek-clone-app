@@ -1,18 +1,20 @@
 import ButtonPrimary from "@/components/Btn/ButtonPrimary";
-import AppBarBoarding from "@/components/Onboarding/AppBar";
+import AppBar from "@/components/Onboarding/AppBar";
 import Sliders from "@/components/Onboarding/Sliders";
 import WrapperScreen from "@/components/WrapperScreen";
 import Colors from "@/constants/Colors";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router"
+
 
 export default function Index() {
   return (
     <WrapperScreen>
-      <AppBarBoarding />
+      <AppBar />
       <View style={styles.container}>
         <Sliders />
         <View style={styles.buttonContainer}>
-          <ButtonPrimary>
+          <ButtonPrimary onPress={() => router.push('/auth/signin')}>
             Masuk
           </ButtonPrimary>
           <ButtonPrimary type="border">
