@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import WrapperScreen from '@/components/WrapperScreen'
+import AppBarBoarding from '@/components/Onboarding/AppBar'
 
 const SignUp = () => {
   return (
-    <View>
+    <WrapperScreen>
+      <AppBarBoarding />
       <Text>SignUp</Text>
-    </View>
+    </WrapperScreen>
   )
 }
 
