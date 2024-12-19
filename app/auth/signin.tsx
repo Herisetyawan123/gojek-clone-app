@@ -5,6 +5,7 @@ import WrapperScreen from '@/components/WrapperScreen'
 import Colors from '@/constants/Colors'
 import InputAuth from '@/components/Input/input-auth'
 import ButtonPrimary from '@/components/Btn/ButtonPrimary'
+import { router } from 'expo-router'
 
 const SignIn = () => {
   return (
@@ -16,7 +17,7 @@ const SignIn = () => {
       </View>
       {/* Label Input Phone Number */}
       <InputAuth />
-      <ButtonPrimary styles={styles.customButton}>
+      <ButtonPrimary onPress={() => router.push('/auth/verification')} styles={styles.customButton}>
         Continue
       </ButtonPrimary>
     </WrapperScreen>
